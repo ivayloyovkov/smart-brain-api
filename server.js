@@ -17,6 +17,7 @@ const db = knex({
     }
 });
 
+pg.defaults.ssl = true;
 app.use(express.json());
 app.use(cors());
 
