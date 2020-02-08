@@ -11,9 +11,7 @@ const profile = require('./controllers/profile');
 
 const db = knex({
     client: 'pg',
-    connection: {
-        database: process.env.DATABASE_URL
-    }
+    connection: process.env.DATABASE_URL
 });
 
 app.use(express.json());
