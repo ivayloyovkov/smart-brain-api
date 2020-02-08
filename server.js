@@ -12,12 +12,10 @@ const profile = require('./controllers/profile');
 const db = knex({
     client: 'pg',
     connection: {
-        connectionString: process.env.DATABASE_URL,
-        ssl: true,
+        database: process.env.DATABASE_URL
     }
 });
 
-pg.defaults.ssl = true;
 app.use(express.json());
 app.use(cors());
 
