@@ -4,7 +4,7 @@ const handleRegister = (req, res, bcrypt, db) => {
     debugger
     db.transaction(trx => {
         trx.insert({
-                hashedPass: hashedPass,
+                hashedpass: hashedPass,
                 email: email
             })
             .into('login')
