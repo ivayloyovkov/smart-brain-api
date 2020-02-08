@@ -1,7 +1,6 @@
 const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, 8);
-    debugger
     db.transaction(trx => {
         trx.insert({
                 hashedpass: hash,
