@@ -9,6 +9,8 @@ const signin = require('./controllers/signin');
 const image = require('./controllers/image');
 const profile = require('./controllers/profile');
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 const db = knex({
     client: 'pg',
     connection: process.env.DATABASE_URL + `?ssl=true`,
