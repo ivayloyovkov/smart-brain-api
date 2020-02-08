@@ -13,7 +13,7 @@ const db = knex({
     client: 'pg',
     connection: process.env.DATABASE_URL
     }
-});
+);
 
 app.use(express.json());
 app.use(cors());
