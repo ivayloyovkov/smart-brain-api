@@ -1,5 +1,3 @@
-import isEmail from '../validator/lib/isEmail';
-
 const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, 8);
