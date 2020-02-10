@@ -8,33 +8,32 @@ const handleRegister = (req, res, bcrypt, db) => {
         return res.status(400).json('Invalid Email')
     } else if (!check('password').isLength({ min: 6 })) {
         return res.status(400).json('Password must be at least 6 characters')
+    } else {
+        db.transaction(trx => {
+            trx.insert({
+                    hashedpass: hash,
+                    email: email
+                })
+                .into('login')
+                .returning('email')
+                .then(loginEmail => {
+                    return trx('users')
+                        .returning('*')
+                        .insert({
+                            email: loginEmail[0],
+                            name: name,
+                            joined: new Date()
+                        })
+                        .then(user => {
+                            res.json(user[0]);
+                        })
+                        .then(trx.commit)
+                        .catch(trx.callback)
+                })
+                .catch(err => res.status(400).json('Unable to register'));
+        })
     }
-
-    db.transaction(trx => {
-        trx.insert({
-                hashedpass: hash,
-                email: email
-            })
-            .into('login')
-            .returning('email')
-            .then(loginEmail => {
-                return trx('users')
-                    .returning('*')
-                    .insert({
-                        email: loginEmail[0],
-                        name: name,
-                        joined: new Date()
-                    })
-                    .then(user => {
-                        res.json(user[0]);
-                    })
-                    .then(trx.commit)
-                    .catch(trx.callback)
-            })
-            .catch(err => res.status(400).json('Unable to register'));
-    })
 }
-
 module.exports = {
     handleRegister
 }
