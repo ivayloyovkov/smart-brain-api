@@ -3,9 +3,9 @@ const { check, validationResult } = require('express-validator');
 const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, 8);
+    check('email').isEmail();
+    check('password').isLength({ min : 6});
     const errors = validationResult(req);
-    check(email).isEmail();
-    check(password).isLength({ min : 6});
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
