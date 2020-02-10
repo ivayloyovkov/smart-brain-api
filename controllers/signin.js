@@ -9,12 +9,12 @@ const handleSignin = (req, res, bcrypt, db) => {
                     .then(user => {
                         res.json(user[0])
                     })
-                    .catch(err => res.status(400).json('Unable to get user'))
+                    .catch(err => res.status(400).json('No user is registered with this email.'))
             } else {
-                res.status(400).json('Wrong username or password')
+                res.status(400).json('Wrong email or password')
             }
         })
-        .catch(err => res.status(400).json('Wrong username or password'))
+        .catch(err => res.status(400).json('Wrong email or password'))
 }
 
 module.exports = {

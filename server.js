@@ -25,7 +25,7 @@ app.post('/signin', (req, res) => { signin.handleSignin(req, res, bcrypt, db) })
 app.post('/register', [check('email').isEmail(), check('password').isLength({ min: 5 })], (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
+        return res.status(422).json('Something went wrong.');
     }
     register.handleRegister(req, res, bcrypt, db)
 })
