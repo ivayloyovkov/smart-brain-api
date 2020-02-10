@@ -23,8 +23,8 @@ app.use(cors());
 app.get('/', (req, res) => { res.json(db.users) })
 app.post('/signin', (req, res) => { signin.handleSignin(req, res, bcrypt, db) })
 app.post('/register', [
-    // username must be an email
-    check('email').isEmail(),
+    // must be a valid email
+    check('email-address').isEmail(),
     // password must be at least 5 chars long
     check('password').isLength({ min: 5 })
 ], (req, res) => { register.handleRegister(req, res, bcrypt, db, validationResult) })
