@@ -1,6 +1,11 @@
 const { check, validationResult } = require('express-validator');
 
-const handleRegister = (req, res, bcrypt, db, validationResult) => {
+const handleRegister =  [
+    // must be a valid email
+    check('req.body.email').isEmail(),
+    // password must be at least 5 chars long
+    check('password').isLength({ min: 5 })
+],  (req, res, bcrypt, db, check, validationResult) => {
     const { email, name, password } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
