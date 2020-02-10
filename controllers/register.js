@@ -1,9 +1,10 @@
-const handleRegister =  (req, res, bcrypt, db) => {
+const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
-    const { check, validationResult } = require('express-validator');
-    check('email').isEmail();
-    check('password').isLength({ min: 5 });
-    const errors = validationResult(req);
+    const validationReq = () => {
+        check('email').isEmail();
+        check('password').isLength({ min: 5 });
+    }
+    const errors = validationResult(validationReq);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
     }
