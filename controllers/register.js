@@ -1,6 +1,15 @@
+const { check, validationResult } = require('express-validator');
+
 const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, 8);
+
+    if (!check(email).isEmail()) {
+        return res.json('Invalid Email')
+    } else if (!check(password).isLength({ min: 6 })) {
+        return res.json('Password must be at least 6 characters')
+    }
+
     db.transaction(trx => {
         trx.insert({
                 hashedpass: hash,
