@@ -27,7 +27,7 @@ app.post('/register', [
     check('email').isEmail(),
     // password must be at least 5 chars long
     check('password').isLength({ min: 5 })
-], (req, res) => { register.handleRegister(req, res, bcrypt, db) })
+], (req, res) => { register.handleRegister(req, res, bcrypt, db, validationResult) })
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db) })
 app.put('/image', (req, res) => { image.handleImage(req, res, db) })
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res) })

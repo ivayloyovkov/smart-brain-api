@@ -1,4 +1,4 @@
-const handleRegister = (req, res, bcrypt, db) => {
+const handleRegister = (req, res, bcrypt, db, validationResult) => {
     const { email, name, password } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
