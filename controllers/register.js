@@ -3,9 +3,9 @@ const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
     if (!check('email').isEmail() && !check('password').isLength({ min: 5 })) {
         return res.status(400).json('Bad')
-    };
+    }
     else {
-        const errors = validationResult(validationReq);
+        // const errors = validationResult(validationReq);
         // if (!errors.isEmpty()) {
         //     return res.status(422).json({ errors: errors.array() });
         // }
