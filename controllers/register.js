@@ -1,13 +1,13 @@
 const handleRegister = (req, res, bcrypt, db) => {
     const { check, validationResult } = require('express-validator');
     const { email, name, password } = req.body;
-    const validationReq = () => {
-        return check('email').isEmail(), check('password').isLength({ min: 5 });
-    }
+    if (!check('email').isEmail() && !check('password').isLength({min : 5})) {
+        return res.status(400).json('Bad')
+    };
     const errors = validationResult(validationReq);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-    }
+    // if (!errors.isEmpty()) {
+    //     return res.status(422).json({ errors: errors.array() });
+    // }
 
     const hash = bcrypt.hashSync(password, 8);
     db.transaction(trx => {
