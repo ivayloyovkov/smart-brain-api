@@ -3,7 +3,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const app = express();
 const knex = require('knex');
-const { check, validationResult } = require('express-validator');
+
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
