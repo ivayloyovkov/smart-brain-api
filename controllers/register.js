@@ -1,4 +1,5 @@
 const handleRegister = (req, res, bcrypt, db) => {
+    const { check, validationResult } = require('express-validator');
     const { email, name, password } = req.body;
     const validationReq = () => {
         check('email').isEmail();
