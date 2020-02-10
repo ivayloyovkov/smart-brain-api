@@ -4,9 +4,9 @@ const handleRegister = (req, res, bcrypt, db) => {
     const { email, name, password } = req.body;
     const hash = bcrypt.hashSync(password, 8);
 
-    if (!check(email).isEmail()) {
+    if (!check('email').isEmail()) {
         return res.status(400).json('Invalid Email')
-    } else if (!check(password).isLength({ min: 6 })) {
+    } else if (!check('password').isLength({ min: 6 })) {
         return res.status(400).json('Password must be at least 6 characters')
     }
 
