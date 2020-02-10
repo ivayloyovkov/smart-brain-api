@@ -34,19 +34,3 @@ app.post('/imageurl', (req, res) => { image.handleApiCall(req, res) })
 app.listen(process.env.PORT, () => {
 
 });
-
-
-app.post('/signup', celebrate({
-    [Segments.BODY]: Joi.object().keys({
-        name: Joi.string().required(),
-        age: Joi.number().integer(),
-        role: Joi.string().default('admin')
-    }),
-    [Segments.QUERY]: {
-        token: Joi.string().token().required()
-    }
-}), (req, res) => {
-    // At this point, req.body has been validated and 
-    // req.body.role is equal to req.body.role if provided in the POST or set to 'admin' by joi
-});
-app.use(errors());
